@@ -1,0 +1,16 @@
+body{
+    font-family: 'Baloo Da 2', cursive;
+    background-image: url("../images/operator.svg");
+    background-size: contain;
+}
+
+.container{
+    background: white;
+    min-height: 100vh;
+}
+
+.quiz-box{
+    font-size: 40px;
+    font-weight: bold;
+    min-height: 200px;
+}

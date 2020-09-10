@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100">
+ <g id="all" fill="#000">  <rect x="22.5" y="10" height="30" width="5"/>  <rect x="10" y="22.5" height="5" width="30"/>  <rect x="60" y="22.5" height="5" width="30"/>
+  <path d="m 62.6257 66.1612 L 83.8389 87.3744 L 87.3744 83.8389 L 66.1612 62.6257 z"/>  <path d="m 62.6257 83.8389 L 66.1612 87.3744 L 87.3744 66.1612 L 83.8389 62.6257 z"/>  <rect x="10" y="72.5" height="5" width="30"/>  <circle cx="25" cy="65.275" r="3.5"/>  <circle cx="25" cy="84.725" r="3.5"/> </g></svg>
