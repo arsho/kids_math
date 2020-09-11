@@ -9,12 +9,12 @@ body{
     min-height: 100vh;
 }
 
-.quiz_rows tr td{
+.quiz_rows tr td, .quiz_rows tr td input{
     vertical-align: middle;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
 }
 
 .quiz_row{
-    min-height: 200px;
+    min-height: 100px;
 }

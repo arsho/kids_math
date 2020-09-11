@@ -7,6 +7,8 @@ $(document).ready(function(){
         "division": "÷"
     };
 
+    var quiz_data = [];
+
     function get_random_integer(min_number, max_number){
         return Math.floor(Math.random() * (max_number - min_number + 1) + min_number);
     }
@@ -57,11 +59,8 @@ $(document).ready(function(){
             <td>
                 =
             </td>
-            <td class="invisible correct-answer">
-                ${question["correct_answer"]}
-            </td>
             <td>
-                <input class="answer-input form-control" type="text">
+                <input id="${question["question_id"]}" class="answer_input form-control" type="text">
             </td>
             </tr>`;
     }
@@ -91,7 +90,7 @@ $(document).ready(function(){
     }
 
     function get_quiz_data(quiz_settings){
-        quiz_data = [];
+        data = [];
         operators = quiz_settings["type_of_questions"];
         max_number_operand_1 = quiz_settings["max_number_operand_1"];
         max_number_operand_2 = quiz_settings["max_number_operand_2"];
@@ -105,14 +104,14 @@ $(document).ready(function(){
             question["operand_1"] = operand_1;
             question["operand_2"] = operand_2;
             question["operator"] = operator;
-            quiz_data.push(question);
+            question["question_id"] = i;
+            data.push(question);
         }
-        return quiz_data;
+        return data;
     }
 
     $("#generate_quiz").on("click", function(){
         quiz_settings = get_quiz_settings();
-        console.log(quiz_settings);
         $("#quiz_wrapper").removeClass("invisible");
         $("#quiz_settings_box").collapse('hide');
         quiz_data = get_quiz_data(quiz_settings);
@@ -122,17 +121,28 @@ $(document).ready(function(){
         }
     });
 
-    $("body").on("focusout", "input.answer-input", function(event){
+    $("body").on("focusout", "input.answer_input", function(event){
         current_value = $(this).val();
-        correct_anwer = $(this).closest(".quiz_row").find(".correct-answer").text().trim();
+        question_id = parseInt($(this).attr("id"));
+        correct_anwer = quiz_data[question_id]["correct_answer"].toString();
         if(current_value === correct_anwer){
             $(this).closest(".quiz_row").removeClass("bg-dark");
+            $(this).closest(".quiz_row").removeClass("bg-danger");
             $(this).closest(".quiz_row").addClass("bg-success");
         }
         else{
             $(this).closest(".quiz_row").removeClass("bg-dark");
+            $(this).closest(".quiz_row").removeClass("bg-success");
             $(this).closest(".quiz_row").addClass("bg-danger");
         }
-        console.log(current_value, correct_anwer);
     });
+
+    $("body").on("keyup", "input.answer_input", function(event){
+        current_value = parseInt($(this).val());
+        bangla_value = current_value.toLocaleString('bn-BD');
+        console.log(current_value, bangla_value);
+        $(this).html(bangla_value);
+    });
+
+
 });
