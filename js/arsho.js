@@ -43,31 +43,30 @@ $(document).ready(function(){
         return correct_answer;
     }
 
-    function get_a_question_div(question){
-        return `<div class="row text-white rounded bg-dark text-center align-items-center quiz-box mb-2">
-            <div class="col">
-                ${question["operand_1"]}
-            </div>
-            <div class="col">
+    function get_a_quiz_row(question){
+        return `<tr class="quiz_row bg-dark text-white text-center align-items-center">
+            <td>
+                ${question["operand_1"].toLocaleString('bn-BD')}
+            </td>
+            <td>
                 ${question["operator"]}
-            </div>
-            <div class="col">
-                ${question["operand_2"]}
-            </div>
-            <div class="col">
+            </td>
+            <td>
+                ${question["operand_2"].toLocaleString('bn-BD')}
+            </td>
+            <td>
                 =
-            </div>
-            <div class="invisible correct-answer">
+            </td>
+            <td class="invisible correct-answer">
                 ${question["correct_answer"]}
-            </div>
-            <div class="col">
-                <input class="answer-input" type="text">
-            </div>
-        </div>`;
+            </td>
+            <td>
+                <input class="answer-input form-control" type="text">
+            </td>
+            </tr>`;
     }
 
     function get_quiz_settings(){
-        $student_name = $("#student_name").val();
         $max_number_operand_1 = parseInt($("#max_number_operand_1").val());
         if(!$max_number_operand_1){
             $max_number_operand_1 = 30;
@@ -83,7 +82,6 @@ $(document).ready(function(){
             $type_of_questions = ["random"];
         }
         return {
-            "student_name": $student_name,
             "max_number_operand_1": $max_number_operand_1,
             "max_number_operand_2": $max_number_operand_2,
             "number_of_questions": $number_of_questions,
@@ -115,25 +113,25 @@ $(document).ready(function(){
     $("#generate_quiz").on("click", function(){
         quiz_settings = get_quiz_settings();
         console.log(quiz_settings);
-        $("#quiz_box").removeClass("invisible");
+        $("#quiz_wrapper").removeClass("invisible");
         $("#quiz_settings_box").collapse('hide');
         quiz_data = get_quiz_data(quiz_settings);
-        $("#quiz_box").html("");
+        $("#quiz_rows").html("");
         for(i = 0; i < quiz_data.length; i++){
-            $("#quiz_box").append(get_a_question_div(quiz_data[i]));
+            $("#quiz_rows").append(get_a_quiz_row(quiz_data[i]));
         }
     });
 
     $("body").on("focusout", "input.answer-input", function(event){
         current_value = $(this).val();
-        correct_anwer = $(this).closest(".quiz-box").find(".correct-answer").text().trim();
+        correct_anwer = $(this).closest(".quiz_row").find(".correct-answer").text().trim();
         if(current_value === correct_anwer){
-            $(this).closest(".quiz-box").removeClass("bg-dark");
-            $(this).closest(".quiz-box").addClass("bg-success");
+            $(this).closest(".quiz_row").removeClass("bg-dark");
+            $(this).closest(".quiz_row").addClass("bg-success");
         }
         else{
-            $(this).closest(".quiz-box").removeClass("bg-dark");
-            $(this).closest(".quiz-box").addClass("bg-danger");
+            $(this).closest(".quiz_row").removeClass("bg-dark");
+            $(this).closest(".quiz_row").addClass("bg-danger");
         }
         console.log(current_value, correct_anwer);
     });
