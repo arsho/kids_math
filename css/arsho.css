@@ -1,7 +1,16 @@
 body{
-    font-family: 'Baloo Da 2', cursive;
-    /* background-image: url("../images/operator.svg");
-    background-size: contain; */
+    background-color: #eee;
+    color: #333;
+}
+
+.blog-header {
+    line-height: 1;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-header-logo {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 2.25rem;
 }
 
 .container{
@@ -17,4 +26,36 @@ body{
 
 .quiz_row{
     min-height: 100px;
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    .blog-header-logo {
+        font-size: 1.5rem !important;
+    }
+
+    .quiz_rows tr td, .quiz_rows tr td input{
+        font-size: 18px !important;
+        font-weight: bold !important;
+    }
+
+    .quiz_row{
+        min-height: 50px !important;
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .blog-header-logo {
+        font-size: 1.5rem !important;
+    }
+
+    .quiz_rows tr td, .quiz_rows tr td input{
+        font-size: 18px !important;
+        font-weight: bold !important;
+    }
+
+    .quiz_row{
+        min-height: 50px !important;
+    }
 }
