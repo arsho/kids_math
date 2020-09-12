@@ -4,6 +4,6 @@
 
 ### Features
 - Math quiz generator for two operands and an operator.
-- Quiz can be generated for both Bangla and English math.
+- Quiz can be generated for both Bangla and English language.
 - Maximum number for both operands can be controlled.
 - Multiple types of operators can be chosen.
