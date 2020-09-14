@@ -31,3 +31,8 @@ body{
 .quiz_row{
     min-height: 100px;
 }
+
+.quiz_rows tr td input:focus{
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}

@@ -109,7 +109,9 @@ $(document).ready(function(){
         <i class="fas fa-equals"></i>
         </td>
         <td>
-        <input id="${question["question_id"]}" class="answer_input form-control" type="${question["input_type"]}" tabindex="${question["question_id"]+1}">
+        <input id="${question["question_id"]}"
+        class="answer_input form-control"
+        type="${question["input_type"]}" tabindex="${question["question_id"]+1}">
         </td>
         <td>
         <button class="btn btn-light"><i class="fa fa-2x fa-calculator"></i></button>
@@ -178,6 +180,9 @@ $(document).ready(function(){
         for(i = 0; i < quiz_data.length; i++){
             $("#quiz_rows").append(get_a_quiz_row(quiz_data[i]));
         }
+        $("#total_questions_value").html(quiz_settings["number_of_questions"]);
+        $("#correct_answers_value").html(0);
+        $("#wrong_answers_value").html(0);
     });
 
     $("body").on("focusout", "input.answer_input", function(event){
@@ -190,17 +195,35 @@ $(document).ready(function(){
             $(this).closest(".quiz_row").addClass("bg-success");
         }
         else{
+            $("#total_questions_value").html(quiz_settings["number_of_questions"]);
             $(this).closest(".quiz_row").removeClass("bg-dark");
             $(this).closest(".quiz_row").removeClass("bg-success");
             $(this).closest(".quiz_row").addClass("bg-danger");
         }
+        $("#correct_answers_value").html($(".quiz_row.bg-success").length);
+        $("#wrong_answers_value").html($(".quiz_row.bg-danger").length);
     });
 
     $("body").on("keyup", "input.answer_input", function(event){
         current_value = get_converted_value($(this).val(), "en");
+        question_id = parseInt($(this).attr("id"));
+        total_anwer_input = $(".answer_input").length;
+        switch (event.which) {
+            case 37:
+            prev_question = question_id-1;
+            $("#"+prev_question).focus();
+            break;
+            case 39:
+            next_question = question_id+1;
+            $("#"+next_question).focus();
+            break;
+            default:
+            break;
+        }
         if(quiz_settings["quiz_language"] === "bn"){
             bangla_value = get_converted_value(current_value, "bn");
             $(this).val(bangla_value);
         }
     });
+
 });
