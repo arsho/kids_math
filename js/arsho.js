@@ -235,11 +235,21 @@ $(document).ready(function(){
         switch (event.which) {
             case 37:
             prev_question = question_id-1;
-            $("#"+prev_question).focus();
+            if(prev_question==-1){
+                $("#"+question_id).blur();
+            }
+            else{
+                $("#"+prev_question).focus();
+            }
             break;
             case 39:
             next_question = question_id+1;
-            $("#"+next_question).focus();
+            if(next_question==total_anwer_input){
+                $("#"+question_id).blur();
+            }
+            else{
+                $("#"+next_question).focus();
+            }
             break;
             default:
             break;
