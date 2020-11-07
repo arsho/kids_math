@@ -35,6 +35,7 @@ $(document).ready(function(){
 
     var quiz_data = [];
     var quiz_settings = {};
+    $('#celebration_deck').hide();
 
     function display_celebration_effects(){
         var end = Date.now() + (5 * 1000);
@@ -65,10 +66,6 @@ $(document).ready(function(){
     }
 
     function display_celebration_message(){
-        $("#celebration_message").html("Very Good!");
-        if(quiz_settings["quiz_language"] === "bn"){
-            $("#celebration_message").html("খুব ভালো!");
-        }
         $('#celebration_deck').slideDown("slow");
     }
 
@@ -158,7 +155,6 @@ $(document).ready(function(){
         <button class="btn btn-light"><i class="fa fa-2x fa-calculator"></i></button>
         </td>
         </tr>`;
-        // fa-long-arrow-alt-right
     }
 
     function get_quiz_settings(){
@@ -227,11 +223,13 @@ $(document).ready(function(){
         for(i = 0; i < quiz_data.length; i++){
             $("#quiz_rows").append(get_a_quiz_row(quiz_data[i]));
         }
+        $("#celebration_message").html("Very good!");
         $("#correct_answers_title").html("Correct Answer");
         $("#wrong_answers_title").html("Wrong Answer");
         $("#correct_answers_value").html(0);
         $("#wrong_answers_value").html(0);
         if(quiz_settings["quiz_language"] === "bn"){
+            $("#celebration_message").html("খুব ভালো!");
             $("#correct_answers_title").html("সঠিক উত্তর");
             $("#wrong_answers_title").html("ভুল উত্তর");
             $("#correct_answers_value").html(get_converted_value("0", "bn"));
