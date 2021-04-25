@@ -1,0 +1,13 @@
+name: Dispatch event to hugo repository
+
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send dispatch event
+        run: |
+            curl -XPOST -u "${{secrets.REPO_OWNER_USERNAME}}:${{secrets.REPO_OWNER_ACCESS_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json"  -H "Content-Type: application/json" https://api.github.com/repos/${{secrets.REPO_OWNER_USERNAME}}/${{secrets.HUGO_REPO_NAME}}/dispatches --data '{"event_type": "build_application"}'
